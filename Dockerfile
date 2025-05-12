@@ -1,9 +1,12 @@
 # תשתית בסיסית של לינוקס עם Xfce ו־VNC
 FROM dorowu/ubuntu-desktop-lxde-vnc
 
-# התקנת Chromium
+# עדכון המאגרים וההתקנה של Chromium
 USER root
-RUN apt-get clean && \
+
+# הוספת המפתח הציבורי עבור Chromium כדי להימנע מבעיות GPG
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 32EE5355A6BC6E42 && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get update && \
     apt-get install -y chromium-browser
